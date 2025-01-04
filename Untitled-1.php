@@ -14,13 +14,7 @@ class RoomController extends Controller
 {
     public function indexResults()
     {
-        $this->prepareResults();
-        return view('partytax.rooms.results',  ['pageName' => 'Результаты', 'allMembersResults' => $this->getMemberResults()]);
-    }
-
-    public function getMemberResults(): array
-    {
-        return $this->allMembersResults;
+        return view('partytax.rooms.results',  ['pageName' => 'Результаты', 'allMembersResults' => $this->allMembersResults]);
     }
 
     /**
@@ -29,20 +23,20 @@ class RoomController extends Controller
 
     private array $allMembersResults = [];
 
-    private function prepareResults()
+    private function getResults()
     {
         $allMembers = RoomMember::where('room_id', session()->get('current_room'))->get();
 
         foreach($allMembers as $member){
-            $this->collectMemberResults($member, $this->calculateMemberResult($member->id));
+            $memberResult = $this->calculateMemberResult($member->id);
+
+            $this->allMembersResults[$member->name] = $memberResult;
         }
 
     }
 
-    private function collectMemberResults($member, $currentResult)
-    {
-        $this->allMembersResults[$member->name] = $currentResult;
-    }
+
+
 
 
     private function calculateMemberResult($memberID)
