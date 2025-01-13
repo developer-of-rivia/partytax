@@ -4,6 +4,7 @@ namespace App\Http\Controllers\PartyTaxService;
 
 use App\Models\RoomMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 
 
@@ -31,7 +32,6 @@ class MemberController extends Controller
         RoomMember::create([
             'name' => $request->get('room-member-name'),
             'room_id' => session()->get('current_room'),
-            'relationships_id' => null,
         ]);
         
         return redirect()->route('partytax-room-mebmers');
@@ -42,6 +42,9 @@ class MemberController extends Controller
 
     public function removeMember($id)
     {
+        DB::table('member_expenses')->where('member_id', $id)->delete();
         RoomMember::where('id', $id)->delete();
+
+        return redirect()->route('partytax-room-mebmers');
     }
 }

@@ -62,6 +62,6 @@ class PaidersController extends Controller
             ]);
         }
 
-        return redirect()->route('expenses.paiders', $paidersFormPost['expenseNumber']);
+        return redirect()->route('partytax.room.expenses.show', $paidersFormPost['expenseNumber']);
     }
 }

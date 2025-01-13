@@ -5,78 +5,69 @@ namespace App\Http\Controllers\PartyTaxService;
 use App\Models\Room;
 use App\Models\Expense;
 use App\Models\RoomMember;
-use App\Http\Controllers\Controller;
 use App\Models\MemberExpense;
+use Illuminate\Support\Facades\DB;
+use App\Services\RoomResultService;
+use App\Http\Controllers\Controller;
 
 
 
 class RoomController extends Controller
 {
-    public function indexResults()
-    {
-        $this->prepareResults();
-        return view('partytax.rooms.results',  ['pageName' => 'Результаты', 'allMembersResults' => $this->getMemberResults()]);
-    }
+    private $roomResultService;
 
-    public function getMemberResults(): array
+    public function __construct(RoomResultService $roomResultService)
     {
-        return $this->allMembersResults;
+        $this->roomResultService = $roomResultService;
     }
 
     /**
-     * ----------------------------------------------
+     * 
      */
 
-    private array $allMembersResults = [];
-
-    private function prepareResults()
+    public function indexInfo()
     {
-        $allMembers = RoomMember::where('room_id', session()->get('current_room'))->get();
+        $current_room_data = Room::where('id', session()->get('current_room'))->get()->first();
+        $current_room_members_count = RoomMember::where('room_id', session()->get('current_room'))->get()->count();
 
-        foreach($allMembers as $member){
-            $this->collectMemberResults($member, $this->calculateMemberResult($member->id));
-        }
-
+        return view('partytax.rooms.main', ['pageName' => 'Информация о комнате', 'roomData' => $current_room_data, 'membersCount' => $current_room_members_count]);
     }
 
-    private function collectMemberResults($member, $currentResult)
+    public function indexResults()
     {
-        $this->allMembersResults[$member->name] = $currentResult;
-    }
+        $this->roomResultService->setCurrentRoom(session()->get('current_room'));
+        $this->roomResultService->prepareResults();
 
-
-    private function calculateMemberResult($memberID)
-    {
-        $hisExpenses = MemberExpense::where('member_id', $memberID)->get();
-        $hisResult = 0;
-
-        foreach($hisExpenses as $expense){
-            $thisExpenseInfo = $this->getExpenseInfo($expense);
-            $contributorsPart = $this->calculateContributorsPart($thisExpenseInfo);
-
-            $hisResult += $contributorsPart;
-        }
-
-        return $hisResult;
+        return view('partytax.rooms.results',  ['pageName' => 'Результаты', 'allMembersResults' => $this->roomResultService->getMemberResults()]);
     }
 
 
-    private function getExpenseInfo($expense)
+
+    /* indexSettings */
+    public function indexSettings()
     {
-        $expenseInfo = [];
+        $current_room_data = Room::where('id', session()->get('current_room'))->get()->first();
+        $current_room_members_count = RoomMember::where('room_id', session()->get('current_room'))->get()->count();
 
-        $expenseInfo['price'] = Expense::where('id', $expense->expense_id)->get()->first()->price;
-        $expenseInfo['contributorsCount'] = MemberExpense::where('expense_id', $expense->expense_id)->get()->count();
-
-        return $expenseInfo;
+        return view('partytax.rooms.settings',  ['pageName' => 'Настройки комнаты', 'roomData' => $current_room_data, 'membersCount' => $current_room_members_count]);
     }
 
 
-    private function calculateContributorsPart($expenseInfo)
-    {
-        $contributorsPart = $expenseInfo['price'] / $expenseInfo['contributorsCount'];
-        $contributorsPart = number_format($contributorsPart);
 
-        return $contributorsPart;
+    public function roomUpdate()
+    {
+        $roomName = $_POST['roomName'];
+        $roomLink = $_POST['roomLink'];
+        $roomPassword = $_POST['roomPassword'];
+        $roomDesc = $_POST['roomDescription'];
+
+        DB::table('rooms')->where('id', session()->get('current_room'))->update([
+            'name' => $roomName,
+            'link' => $roomLink,
+            'password' => $roomPassword,
+            'description' => $roomDesc
+        ]);
+
+        return redirect()->route('partytax-room-info');
     }
 }

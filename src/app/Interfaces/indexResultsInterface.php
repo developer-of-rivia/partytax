@@ -7,7 +7,3 @@ namespace App\Interfaces;
 interface indexResultsInterface{
      
 }
-
-
-
-
