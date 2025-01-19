@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\AccountController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RegisterController;
 
 
@@ -23,23 +24,25 @@ use App\Http\Controllers\PartyTaxService\MemberController;
 */
 
 
-Route::get('/', function(){
-    return redirect()->route('partytax-home');
-});
+Route::get('/partytax', [IndexController::class, 'index']);
 
-Route::group(['middleware' => ['notAuthCheck']], function(){
-    // register
-    Route::get('register', [RegisterController::class, 'index'])->name('register-page');
-    Route::post('register', [RegisterController::class, 'create'])->name('register');
-    // auth
-    Route::get('sign-in', [AuthController::class, 'index'])->name('auth-page');
-    Route::post('sign-in', [AuthController::class, 'auth'])->name('auth');
-});
+// Route::get('/', function(){
+//     return redirect()->route('partytax-home');
+// });
+
+// Route::group(['middleware' => ['notAuthCheck']], function(){
+//     // register
+//     Route::get('register', [RegisterController::class, 'index'])->name('register-page');
+//     Route::post('register', [RegisterController::class, 'create'])->name('register');
+//     // auth
+//     Route::get('sign-in', [AuthController::class, 'index'])->name('auth-page');
+//     Route::post('sign-in', [AuthController::class, 'auth'])->name('auth');
+// });
 
 
-Route::group(['middleware' => ['authCheck']], function(){
-    // logout
-    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
-    // Account
-    Route::get('accout', [AccountController::class, 'index'])->name('account-page');
-});
+// Route::group(['middleware' => ['authCheck']], function(){
+//     // logout
+//     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+//     // Account
+//     Route::get('accout', [AccountController::class, 'index'])->name('account-page');
+// });
