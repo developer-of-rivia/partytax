@@ -1,0 +1,292 @@
+/* reset */
+*{
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto';
+}
+/* settings */
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.container{
+    height: 100%;
+    padding: 0 15px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.container_centered{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.page{
+    flex-grow: 1;
+}
+/* my-utils */
+.w-full{
+    width: 100%;
+}
+.mt-auto{
+    margin-top: auto;
+}
+.ml-auto{
+    margin-left: auto;
+}
+/* components */
+.input-row{
+    width: 100%;
+}
+/* PARTS */
+/* header */
+
+/* register */
+.register{
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.register__box{
+    max-width: 500px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+}
+/* partytax */
+.partytax{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 85px;
+}
+.partytax__title{
+    text-align: center;
+    margin-bottom: 30px;
+}
+.partytax__button{
+    display: block;
+    text-align: center;
+}
+.partytax__rooms{
+    margin-top: 30px;
+}
+.partytax__buttons{
+    padding-bottom: 15px;
+    border-bottom: 1px solid #ccc;
+}
+/* partyNav */
+/* partyNav */
+/* partyNav */
+.party-nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 7px;
+    padding: 0 10px;
+    margin-top: 15px;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background: #fff;
+    box-shadow: 0 0 15px 5px rgba(0,0,0,0.3);
+}
+.party-nav__menu{
+    background: #333333;
+    padding: 10px;
+    margin-top: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    cursor: pointer;
+    border-radius: 15px;
+    width: 80%;
+    margin: 7px;
+    flex-grow: 1;
+}
+.bottom-item svg{
+    width: 40px;
+    stroke: #7E7E7E;
+}
+.bottom-item_active svg{
+    stroke: #fff;
+}
+.party-nav__side{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.party-nav__side-button svg{
+    width: 35px;
+    stroke: #333;
+}
+.party-nav__side-button_active svg{
+    stroke: tomato;
+}
+/* partytaxhome */
+/* partytaxhome */
+/* partytaxhome */
+.partytax__home-box{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    row-gap: 40px;
+}
+.partytax__home-item{
+    width: 48%;
+    text-align: center;
+}
+.partytax__home-item-title{
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+.partytax__home-item-icon{
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+.partytax__home-item-icon svg{
+    width: 80px;
+}
+
+
+
+/**/
+.partytax__room-item{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.partytax__room-item-delete{
+    margin-left: 10px;
+}
+.partytax__room-item-delete svg{
+    stroke: red;
+    width: 24px;
+}
+.partytax__room-item-active{
+    color: green;
+    font-weight: 600;
+}
+/* members */
+.partytax__members-list{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+.partytax__member{
+    width: 100%;
+    background: #333;
+    padding: 10px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.partytax__member-buttons{
+    display: flex;
+    gap: 10px;
+}
+.partytax__member-buttons svg{
+    width: 22px;
+}
+.partytax__member-buttons-settings svg{
+    stroke: #fff;
+}
+.partytax__member-buttons-delete svg{
+    stroke: tomato;
+}
+/* partytax nav */
+.partytax-nav{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+}
+.partytax-nav_root{
+    justify-content: center;
+}
+.partytax-nav_root .partytax-nav__currentpage{
+    margin-left: 0;
+}
+.partytax-nav__backlink svg{
+    width: 25px;
+}
+.partytax-nav__currentpage{
+    font-weight: 600;
+}
+.partytax-nav_hidden{
+    display: none;
+}
+/* add-members-form */
+.add-members-form{
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+
+
+/* expenses */
+.expense-item{
+    padding: 5px;
+    background: #cff4fc;
+    margin-bottom: 7px;
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+}
+.expense-item__name{
+    font-weight: 500;
+}
+.expense-item__price{
+    color: green;
+    margin-left: 8px;
+    font-weight: 500;
+}
+.expenses-item__checkbox{
+    display: inline-block;
+    margin-left: auto;
+}
+.expense-item__edit svg{
+    width: 15px;
+}
+.expense-item__remove{
+    margin-left: 5px;
+}
+.expense-item__remove svg{
+    width: 15px;
+    fill: tomato;
+}
+.expenses-group-edit{
+    font-size: 12px;
+    padding: 5px;
+    background: #333;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    color: #fff;
+}
+.expenses-group-edit svg{
+    width: 15px;
+}
+
+/* room info */
+.partytax-info__item{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.partytax-info__item_col{
+    flex-direction: column;
+}
+.partytax-info__item h6{
+    margin-bottom: 0;
+}

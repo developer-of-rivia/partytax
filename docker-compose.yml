@@ -23,13 +23,19 @@ services:
     volumes:
       - ./src:/var/www/party
 
+  noda:
+    container_name: nodejs
+    build: dockerfiles/noda
+    volumes:
+      - ./src:/var/www/party
+    ports:
+    - "5173:5173"
+
   artisan:
     container_name: artisan
     build: dockerfiles/artisan
     volumes:
       - ./src:/var/www/party
-    ports:
-      - "9999:8000"
 
   pgsql:
     image: postgres:latest
