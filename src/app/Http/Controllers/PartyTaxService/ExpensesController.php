@@ -7,7 +7,7 @@ use App\Models\RoomMember;
 use App\Models\MemberExpense;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Actions\Partytax\FindExpenseMultiplier;
+use App\Actions\Partytax\FindExpensePriceWillStore;
 
 class ExpensesController extends Controller
 {    
@@ -23,12 +23,14 @@ class ExpensesController extends Controller
         return view('partytax.rooms.expenses-add', ['pageName' => 'Добавить трату']);
     }
 
-    public function store(FindExpenseMultiplier $findExpenseMultiplier)
+    public function store(FindExpensePriceWillStore $findExpensePriceWillStore)
     {
+        $PriceWillStore = $findExpensePriceWillStore->handle($_POST);
+
         Expense::create([
             'name' => $_POST['expense-name'],
             'room_id' => session()->get('current_room'),
-            'price' => $_POST['price'],
+            'price' => $PriceWillStore,
             'count' => $_POST['expense-count'],
         ]);
 
@@ -49,9 +51,16 @@ class ExpensesController extends Controller
 
         $contributorsList = RoomMember::whereIn('id', $contributorsFor2)->get();
 
-
-
-
         return view('partytax.rooms.expenses-show', ['pageName' => 'Редактирование товара', 'currentExpense' => $showableExpense, 'contributorsList' => $contributorsList]);
+    }
+
+    public function remove($id)
+    {
+        $thisRoomExpenses = Expense::where('room_id', session()->get('current_room'))->get();
+
+        DB::table('member_expenses')->where('expense_id', $id)->delete();
+        DB::table('expenses')->where('id', $id)->delete();
+
+        return redirect()->route('partytax.room.expenses');
     }
 }

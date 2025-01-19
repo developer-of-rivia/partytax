@@ -258,6 +258,13 @@ body{
 .expense-item__edit svg{
     width: 15px;
 }
+.expense-item__remove{
+    margin-left: 5px;
+}
+.expense-item__remove svg{
+    width: 15px;
+    fill: tomato;
+}
 .expenses-group-edit{
     font-size: 12px;
     padding: 5px;
@@ -270,15 +277,15 @@ body{
     width: 15px;
 }
 
-
-
-
 /* room info */
 .partytax-info__item{
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
+}
+.partytax-info__item_col{
+    flex-direction: column;
 }
 .partytax-info__item h6{
     margin-bottom: 0;

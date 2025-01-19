@@ -4,7 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 
-class FindExpenseMultiplierException extends Exception
+class FindExpensePriceException extends Exception
 {
     public function render()
     {

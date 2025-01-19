@@ -1,11 +1,11 @@
 <?php
 namespace App\Actions\Partytax;
 
-use App\Exceptions\FindExpenseMultiplierException;
+use App\Exceptions\FindExpensePriceException;
 use App\Models\Room;
 
 
-class FindExpenseMultiplier
+class FindExpensePrice
 {
     private $expenseComposition;
     private $knownMultiplier;
@@ -24,7 +24,7 @@ class FindExpenseMultiplier
     public function getKnownMultiplier()
     {
         if($this->knownMultiplier == null){
-            throw new FindExpenseMultiplierException();
+            throw new FindExpensePriceException();
         } else {
             return $this->knownMultiplier;
         }
@@ -33,7 +33,7 @@ class FindExpenseMultiplier
     public function handle()
     {
         if($this->expenseComposition == null || $this->knownMultiplier == null){
-            throw new FindExpenseMultiplierException();
+            throw new FindExpensePriceException();
         } else {
             $this->result = $this->expenseComposition / $this->knownMultiplier;
         }
@@ -42,7 +42,7 @@ class FindExpenseMultiplier
     public function getResult()
     {
         if($this->result == null){
-            throw new FindExpenseMultiplierException();
+            throw new FindExpensePriceException();
         } else {
             return $this->result;
         }

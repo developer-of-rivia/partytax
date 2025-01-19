@@ -5,30 +5,31 @@
 @section('specific_content')
     <div class="partytax page">
         <div class="container">
-            <div>
-                <span>
-                    Название
-                </span>
-                <strong>
-                    {{ $currentExpense->name }}
-                </strong>
-            </div>
-            <div>
-                <span>
-                    Количество
-                </span>
-                <strong>
-                    {{ $currentExpense->count }} шт
-                </strong>
-            </div>
-            <div>
-                <span>
-                    Цена
-                </span>
-                <strong>
-                    {{ $currentExpense->price }} р
-                </strong>
-            </div>
+            <form action="">
+                <div>
+                    <span>
+                        Название
+                    </span>
+                    <input type="text" class="form-control" value="{{ $currentExpense->name }}">
+                </div>
+                <br>
+                <div>
+                    <span>
+                        Количество
+                    </span>
+                    <input type="text" class="form-control" value="{{ $currentExpense->count }}">
+                </div>
+                <br>
+                <div>
+                    <span>
+                        Цена
+                    </span>
+                    <input type="text" class="form-control" value="{{ $currentExpense->price }}">
+                </div>
+                <br>
+                <button class="btn btn-primary">Сохранить</button>
+            </form>
+            <hr>
             <div class="mt-5">
                 <h2>
                     Кто скидывается?

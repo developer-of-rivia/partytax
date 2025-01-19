@@ -8,8 +8,8 @@
                 <a href="{{ route('partytax-rooms-create-page') }}" class="partytax__button mb-2">
                     Создать комнату
                 </a>
-                <a href="{{ route('partytax-rooms-join-page') }}" class="partytax__button">
-                    Отслеживать комнату
+                <a href="{{ route('partytax-rooms-subscribers-add-page') }}" class="partytax__button">
+                    Подписаться на комнату
                 </a>
             </div>
             <div class="partytax__rooms">
@@ -34,9 +34,9 @@
                 </div>
             </div>
             <div class="partytax__rooms">
-                <h3>Я отлеживаю:</h3>
+                <h3>Я подписан на этих комнаты:</h3>
                 <div class="partytax__rooms-list">
-                    @foreach($roomsUserMember as $room)
+                    @foreach($roomsUserSubscriber as $room)
                         <div class="partytax__room-item">
                             <div class="partytax__room-item-name">
                                 {{ $room->name }}
@@ -46,15 +46,15 @@
                                     Активно
                                 </div>
                             @else
-                                <a href="http://127.0.0.1:8000/partytax/room/change/{{$room->id}}" class="partytax__room-item-status ml-auto">
+                                <a href="{{ route('partytax-room-change', $room->id) }}" class="partytax__room-item-status ml-auto">
                                     Переключиться
                                 </a>
                             @endif
-                            <a href="http://127.0.0.1:8000/partytax/room/forget/{{$room->id}}" class="partytax__room-item-delete">
+                            <a href="{{ route('partytax-room-subscribers-remove', $room->id) }}" class="partytax__room-item-delete">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
                                 </svg>
-                                Не отслеживать
+                                Отписаться
                             </a>
                         </div>
                     @endforeach

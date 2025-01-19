@@ -33,18 +33,23 @@ Route::group(['middleware' => ['authCheck']], function(){
             // создание комнаты
             Route::get('/create', [PartyTaxController::class, 'indexCreatePage'])->name('partytax-rooms-create-page');
             Route::post('/create', [PartyTaxController::class, 'createRoom'])->name('partytax-rooms-create');
-            // присоединение к комнате
-            Route::get('/join', [PartyTaxController::class, 'indexJoinPage'])->name('partytax-rooms-join-page');
             // смена комнаты
             Route::get('/change/{id}', [PartyTaxController::class, 'changeRoom'])->name('partytax-room-change');
-            // забыть комнату
-            Route::get('/forget/{id}', [PartyTaxController::class, 'forgetRoom'])->name('partytax-rooms-forget');
+
+
+            /* */
+            Route::get('/subscribers/add', [PartyTaxController::class, 'indexSubscribersAddPage'])->name('partytax-rooms-subscribers-add-page');
+            Route::post('/subscribers/add', [PartyTaxController::class, 'subscribersAdd'])->name('partytax-rooms-subscribers-add');
+            Route::get('/subscribers/{id}/remove', [PartyTaxController::class, 'subscribersRemove'])->name('partytax-room-subscribers-remove');
+
+
 
             /* простые контроллеры для комнат */
             Route::get('/info', [RoomController::class, 'indexInfo'])->name('partytax-room-info');
             Route::get('/results', [RoomController::class, 'indexResults'])->name('partytax-room-results');
             Route::get('/settings', [RoomController::class, 'indexSettings'])->name('partytax-room-settings');
-           
+            Route::post('/settings', [RoomController::class, 'roomUpdate'])->name('partytax-room-update');
+
             /* members */
             Route::group(['prefix' => 'members'], function(){
                 Route::get('/', [MemberController::class, 'indexMembers'])->name('partytax-room-mebmers');
@@ -60,7 +65,8 @@ Route::group(['middleware' => ['authCheck']], function(){
             Route::get('/expenses/create', [ExpensesController::class, 'create'])->name('partytax.room.expenses.create');
             Route::post('/expenses/create', [ExpensesController::class, 'store'])->name('partytax.room.expenses.store');
             Route::get('/expenses/{id}', [ExpensesController::class, 'show'])->name('partytax.room.expenses.show');
-            
+            Route::get('/expenses/{id}/remove', [ExpensesController::class, 'remove'])->name('partytax.room.expenses.remove');
+
             /* expense-paiders */
             Route::get('/expenses/{id}/paiders', [PaidersController::class, 'index'])->name('expenses.paiders');
             Route::post('/expenses/{id}/paiders/update', [PaidersController::class, 'update'])->name('expenses.paiders.update');

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\PartyTaxService;
 use App\Models\Room;
 use App\Models\RoomMember;
 use Illuminate\Http\Request;
+use App\Models\roomSubscribers;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Actions\Room\RoomLinkCreator;
 use App\Actions\Partytax\SetCurrentRoom;
@@ -26,25 +28,36 @@ class PartyTaxController extends Controller
         return view('partytax.rooms.favs-add', ['pageName' => 'Добавление в избранные']);
     }
 
+
+
+
+
+
     public function indexRooms()
     {
-        // получаем все комнаты, в которых участвует данный юзер
-        $roomsID = [];
-        $RelationsUserMember = RoomMember::where('relationships_id', session()->get('id'))->get();
-        $roomsUserMember = [];
-        foreach($RelationsUserMember as $item)
-        {
-            array_push($roomsID, $item->room_id);
-        }
-        foreach($roomsID as $item)
-        {
-            array_push($roomsUserMember, Room::where('id', $item)->get()->first());
-        }
+        // dd(session()->all());
 
-        // все комнаты, которые создал данный юзер
         $roomsUserCreator = Room::where('creator_id', session()->get('id'))->get();
-        return view('partytax.rooms.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserMember' => $roomsUserMember, 'pageName' => false]);
+
+        $roomsUserSubscriber = DB::table('room_subscribers')->where('user_id', session()->get('id'))
+            ->join('rooms', function($join){
+                $join->on('room_subscribers.room_id', '=', 'rooms.id');
+            })
+            ->select('rooms.id', 'rooms.name')
+            ->get();
+
+
+        return view('partytax.rooms.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserSubscriber' => $roomsUserSubscriber, 'pageName' => false]);
     }
+
+
+
+
+
+
+
+
+
 
     public function changeRoom(SetCurrentRoom $changeRoomAction, $id)
     {
@@ -95,9 +108,41 @@ class PartyTaxController extends Controller
     }
 
 
-    // присоединиться к комнате
-    public function indexJoinPage()
+
+
+    /**/
+    /**/
+    /**/
+
+
+    public function indexSubscribersAddPage()
     {
-        return view('partytax.joinpage', ['pageName' => 'Отслеживать комнату']);
+        return view('partytax.rooms.subscribers', ['pageName' => 'Отслеживать комнату']);
+    }
+
+
+    public function subscribersAdd(SetCurrentRoom $setCurrentRoom)
+    {
+        $requestRoom = Room::where('link', $_POST['roomLink'])->where('password', $_POST['roomPass'])->get()->first();
+
+        roomSubscribers::create([
+            'user_id' => session()->get('id'),
+            'room_id' => $requestRoom->id,
+        ]);
+
+        $setCurrentRoom->setChoisenRoomID($requestRoom->id);
+        $setCurrentRoom->handle();
+
+        return redirect()->route('partytax-rooms');
+    }
+
+    
+    public function subscribersRemove($id)
+    {
+        roomSubscribers::where('room_id', $id)->delete();
+        
+        session()->forget('current_room');
+
+        return redirect()->route('partytax-rooms');
     }
 }
