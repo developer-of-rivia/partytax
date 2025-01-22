@@ -3,7 +3,8 @@
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: 'Roboto';
+    font-family: 'Inter';
+    color: #1f2937;
 }
 /* settings */
 body{
@@ -11,12 +12,17 @@ body{
     display: flex;
     flex-direction: column;
 }
+.partytax.page{
+    height: calc(100vh - 121px);
+}
 .container{
     height: 100%;
     padding: 0 15px;
-    padding-top: 10px;
+    padding-top: 20px;
+    padding-bottom: 50px;
     display: flex;
     flex-direction: column;
+    overflow-y: scroll;
 }
 .container_centered{
     display: flex;
@@ -40,9 +46,45 @@ body{
 .input-row{
     width: 100%;
 }
+.form-label{
+    font-size: 14px;
+}
 /* PARTS */
 /* header */
-
+.header{
+    padding: 10px;
+    border-bottom: 1px solid rgb(229 231 235);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.header__location{
+    font-size: 14px;
+    align-items: center;
+}
+.header__location svg{
+    width: 13px;
+    margin-left: 4px;
+    fill: #fff;
+}
+.header__backlink{
+    display: inline-flex;
+    align-items: center;
+    width: 16px;
+}
+.header__backlink button{
+    background: none;
+    border: none;
+    margin-right: 9px;
+}
+.header__backlink svg{
+    width: 20px;
+    height: 20px;
+}
+.header__btn-profile svg{
+    width: 16px;
+    fill: #1f2937;
+}
 /* register */
 .register{
     height: 100vh;
@@ -61,7 +103,7 @@ body{
     flex-grow: 1;
     display: flex;
     flex-direction: column;
-    padding-bottom: 85px;
+    padding-bottom: 77px;
 }
 .partytax__title{
     text-align: center;
@@ -92,7 +134,8 @@ body{
     position: fixed;
     bottom: 0;
     background: #fff;
-    box-shadow: 0 0 15px 5px rgba(0,0,0,0.3);
+    border: 1px solid rgb(229 231 235);
+    box-shadow: -30px 30px 50px 22px rgba(0,0,0,.3);
 }
 .party-nav__menu{
     background: #333333;
@@ -167,26 +210,7 @@ body{
     stroke: red;
     width: 24px;
 }
-.partytax__room-item-active{
-    color: green;
-    font-weight: 600;
-}
 /* members */
-.partytax__members-list{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 10px;
-}
-.partytax__member{
-    width: 100%;
-    background: #333;
-    padding: 10px;
-    color: #fff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 .partytax__member-buttons{
     display: flex;
     gap: 10px;
@@ -235,25 +259,12 @@ body{
 
 
 /* expenses */
-.expense-item{
-    padding: 5px;
-    background: #cff4fc;
-    margin-bottom: 7px;
-    border: 1px solid #ccc;
-    display: flex;
-    align-items: center;
-}
-.expense-item__name{
-    font-weight: 500;
-}
-.expense-item__price{
-    color: green;
-    margin-left: 8px;
-    font-weight: 500;
-}
 .expenses-item__checkbox{
     display: inline-block;
     margin-left: auto;
+}
+.expense-item__edit{
+    text-decoration: none;
 }
 .expense-item__edit svg{
     width: 15px;
@@ -276,17 +287,54 @@ body{
 .expenses-group-edit svg{
     width: 15px;
 }
+.expenses__item-name{
+    font-size: 14px;
+}
+.expenses__item-buttons{
+    display: flex;
+    flex-direction: column;
+}
+.expenses__item-price{
+    vertical-align: middle;
+}
 
 /* room info */
-.partytax-info__item{
+.dashboard-info__item{
     display: flex;
     align-items: center;
     gap: 10px;
     margin-bottom: 10px;
 }
-.partytax-info__item_col{
+.dashboard-info__item_col{
     flex-direction: column;
 }
-.partytax-info__item h6{
+.dashboard-info__item h6{
     margin-bottom: 0;
+    font-size: 14px;
+}
+
+
+
+
+
+/* main page */
+.main__button-area{
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: 10px;
+}
+.dashboard-info__room-link{
+    display: inline-flex;
+}
+.dashboard-info__room-link span{
+    overflow: hidden;
+    max-width: 110px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: #0d6efd;
+}
+.dashboard-info__room-link svg{
+    width: 13px;
+    margin-right: 5px;
+    fill: #0d6efd;
 }
