@@ -2,11 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\MemberExpense;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Expense extends Model
 {
+    public function membersExpenses()
+    {
+        return $this->hasMany(MemberExpense::class);
+    }
+
     use HasFactory;
 
     protected $fillable = ['price', 'name', 'room_id', 'count'];

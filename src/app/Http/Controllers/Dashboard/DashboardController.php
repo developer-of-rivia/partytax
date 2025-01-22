@@ -41,15 +41,15 @@ class DashboardController extends Controller
 
         $roomsUserCreator = Room::where('creator_id', Auth::user()->id)->get();
 
-        $roomsUserSubscriber = DB::table('room_subscribers')->where('user_id', Auth::user()->id)
-            ->join('rooms', function($join){
-                $join->on('room_subscribers.room_id', '=', 'rooms.id');
-            })
-            ->select('rooms.id', 'rooms.name')
-            ->get();
+        // $roomsUserSubscriber = DB::table('room_subscribers')->where('user_id', Auth::user()->id)
+        //     ->join('rooms', function($join){
+        //         $join->on('room_subscribers.room_id', '=', 'rooms.id');
+        //     })
+        //     ->select('rooms.id', 'rooms.name')
+        //     ->get();
 
 
-        return view('dashboard.rooms.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserSubscriber' => $roomsUserSubscriber, 'pageName' => 'Все комнаты']);
+        return view('dashboard.rooms.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserSubscriber' => false, 'pageName' => 'Все комнаты']);
     }
 
 

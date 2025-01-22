@@ -33,7 +33,7 @@
             </div>
         </div>
         <hr>
-        <div class="partytax__rooms">
+        {{-- <div class="partytax__rooms">
             <h5>Я подписан на этих комнаты:</h5>
             <div class="partytax__rooms-list">
                 @foreach($roomsUserSubscriber as $room)
@@ -59,6 +59,6 @@
                     </div>
                 @endforeach
             </div>
-        </div>
+        </div> --}}
     </div>
 @endsection
