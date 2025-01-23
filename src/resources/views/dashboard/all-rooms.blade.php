@@ -11,8 +11,8 @@
                 Подписаться на комнату
             </a>
         </div>
-        <div class="partytax__rooms">
-            <h5 class="mb-3">Я создатель в этих комнатах:</h5>
+        <div class="partytax__rooms mb-5">
+            <h5 class="mb-2">Мои комнаты:</h5>
             <ul class="list-group">
                 @foreach($roomsUserCreator as $room)
                     <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -21,11 +21,11 @@
                         </div>
                         @if(session()->get('current_room') == $room->id)
                             <span class="badge text-bg-success rounded-pill">
-                                Активно
+                                Вы вошли сюда
                             </span>
                         @else
                             <a href="{{ route('dashboard.room.change', $room->id) }}" class="badge text-bg-primary rounded-pill ml-auto">
-                                Переключиться
+                                Войти
                             </a>
                         @endif
                     </li>
@@ -33,7 +33,7 @@
             </ul>
         </div>
         <div class="partytax__rooms mt-5">
-            <h5>Я подписан на этих комнаты:</h5>
+            <h5>Я подписан на эти комнаты:</h5>
                 <ul class="list-group">
                     @foreach($roomsUserSubscriber as $room)
                         <li class="list-group-item d-flex justify-content-between align-items-start">
@@ -44,18 +44,18 @@
                                     @method('delete')
                                     <input type="text" value="{{ $room->id }}" name="roomID" hidden>
                                     <button type="submit" class="badge text-bg-danger rounded-pill ml-auto mt-1" style="border: none">
-                                        отписка
+                                        Отписаться
                                     </button>
                                 </form>
                             </div>
                             <div class="d-flex flex-column align-items-end">
                                 @if(session()->get('current_room') == $room->id)
                                     <span class="badge text-bg-success rounded-pill">
-                                        Активно
+                                        Вы вошли сюда
                                     </span>
                                     @else
                                     <a href="{{ route('dashboard.room.change', $room->id) }}" class="badge text-bg-primary rounded-pill ml-auto">
-                                        Переключиться
+                                        Войти
                                     </a>
                                 @endif
                             </div>

@@ -14,7 +14,7 @@
                     <input type="submit" class="btn btn-primary w-full" class="input" value="Сохранить">
                 </div>   
             </form>
-            <a href="{{ route('dashboard.room.members.favs') }}" class="btn btn-secondary">Избранные</a>
+            {{-- <a href="{{ route('dashboard.room.members.favs') }}" class="btn btn-secondary">Избранные</a> --}}
         </div>
     </div>
 @endsection

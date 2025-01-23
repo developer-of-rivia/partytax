@@ -13,12 +13,9 @@ class PaidersController extends Controller
     private $paidersForExpensesNumber; 
 
 
-
-
     /**
      * Страница со всеми участниками к трате
      */
-
     public function index($id)
     {
         $this->paidersForExpensesNumber = $id;

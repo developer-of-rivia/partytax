@@ -20,7 +20,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('creator_id');
             $table->index('creator_id', 'creator_user_creator_idx');
-            $table->foreign('creator_id', 'creator_user_creator_fk')->on('users')->references('id');
+            $table->foreign('creator_id', 'creator_user_creator_fk')->on('users')->references('id')->onDelete('cascade');
         });
     }
 

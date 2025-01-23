@@ -53,7 +53,6 @@ class Kernel extends HttpKernel
      * @var array<string, class-string|string>
      */
     protected $middlewareAliases = [
-        'navMake' => \App\Http\Middleware\navMake::class,
         'auth' => \App\Http\Middleware\Authenticate::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
@@ -66,5 +65,6 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'generateDashboardBreadcrumbs' => \App\Http\Middleware\GenerateDashboardBreadcrumbs::class,
+        'canRoomEditCheck' => \App\Http\Middleware\canRoomEditCheck::class,
     ];
 }

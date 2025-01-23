@@ -52,10 +52,12 @@
         <div class="alert alert-primary" role="alert">
             {{ $roomData->description }}
         </div>
-        <div class="main__button-area">
-            <a href="{{ route('dashboard.room.settings') }}" class="link link-danger">
-                Редактировать страницу
-            </a>
-        </div>
+        @if(session()->get('canIEditThisRoom'))
+            <div class="main__button-area">
+                <a href="{{ route('dashboard.room.settings') }}" class="link link-danger">
+                    Редактировать страницу
+                </a>
+            </div>
+        @endif
     </div>
 @endsection

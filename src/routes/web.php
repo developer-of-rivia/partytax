@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::group(['prefix' => 'dashboard', 'middleware' => 'generateDashboardBreadcrumbs'], function(){
         Route::get('/', [DashboardController::class, 'indexHomePage'])->name('dashboard.home');
 
-        Route::group(['prefix' => 'room'], function(){
+        Route::group(['prefix' => 'room', 'middleware' => 'canRoomEditCheck'], function(){
             Route::get('/all-rooms', [DashboardController::class, 'indexAllRoomsPage'])->name('dashboard.all-rooms');
             Route::get('/create', [DashboardController::class, 'indexCreatePage'])->name('dashboard.create-page');
             Route::post('/create', [DashboardController::class, 'createRoom'])->name('dashboard.create');

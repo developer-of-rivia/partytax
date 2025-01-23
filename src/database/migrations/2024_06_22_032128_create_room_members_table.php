@@ -17,14 +17,14 @@ return new class extends Migration
             // room id
             $table->unsignedBigInteger('room_id');
             $table->index('room_id', 'room_member_room_idx');
-            $table->foreign('room_id', 'room_member_room_fk')->on('rooms')->references('id');
+            $table->foreign('room_id', 'room_member_room_fk')->on('rooms')->references('id')->onDelete('cascade');
             
             $table->string('name');
             
             // relation id
             $table->unsignedBigInteger('relationships_id')->nullable();
             $table->index('relationships_id', 'room_member_relationships_id_idx');
-            $table->foreign('relationships_id', 'room_member_relationships_id_fk')->on('users')->references('id');
+            $table->foreign('relationships_id', 'room_member_relationships_id_fk')->on('users')->references('id')->onDelete('cascade');
         });
     }
 

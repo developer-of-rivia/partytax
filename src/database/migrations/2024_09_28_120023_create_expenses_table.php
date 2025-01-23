@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->unsignedBigInteger('room_id');
             $table->index('room_id', 'expense_room_expense_idx');
-            $table->foreign('room_id', 'expense_room_expense_fk')->on('rooms')->references('id');
+            $table->foreign('room_id', 'expense_room_expense_fk')->on('rooms')->references('id')->onDelete('cascade');
         });
     }
 

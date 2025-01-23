@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Room;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\RoomSubscriber;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\RedirectResponse;
 use App\Actions\Dashboard\SetCurrentRoom;
 
 
@@ -15,7 +17,7 @@ class RoomSubscriberController extends Controller
     /**
      * Index subscribers add page
      */
-    public function indexSubscribersAddPage()
+    public function indexSubscribersAddPage(): View
     {
         return view('dashboard.subscribers', ['pageName' => 'Отслеживать комнату']);
     }
@@ -23,7 +25,7 @@ class RoomSubscriberController extends Controller
     /**
      * Make subscribe on room
      */
-    public function subscriberAdd(SetCurrentRoom $setCurrentRoom)
+    public function subscriberAdd(SetCurrentRoom $setCurrentRoom): RedirectResponse
     {
         $requestRoom = Room::where('link', $_POST['roomLink'])->where('password', $_POST['roomPass'])->get()->first();
 
@@ -41,7 +43,7 @@ class RoomSubscriberController extends Controller
     /**
      * Unsubscribe from room
      */
-    public function subscriberRemove(Request $request)
+    public function subscriberRemove(Request $request): RedirectResponse
     {
         RoomSubscriber::where('room_id', $request->roomID)->delete();
         

@@ -24,8 +24,8 @@ return new class extends Migration
             $table->index('member_id', 'member_expense_member_idx');
             $table->index('expense_id', 'member_expense_expense_idx');
 
-            $table->foreign('member_id', 'member_expense_member_fk')->on('room_members')->references('id');
-            $table->foreign('expense_id', 'member_expense_expense_fk')->on('expenses')->references('id');
+            $table->foreign('member_id', 'member_expense_member_fk')->on('room_members')->references('id')->onDelete('cascade');
+            $table->foreign('expense_id', 'member_expense_expense_fk')->on('expenses')->references('id')->onDelete('cascade');
         });
     }
 
