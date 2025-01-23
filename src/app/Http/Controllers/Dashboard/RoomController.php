@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Room;
 use App\Models\Expense;
+use Illuminate\View\View;
 use App\Models\RoomMember;
 use App\Models\MemberExpense;
 use Illuminate\Support\Facades\DB;
 use App\Services\RoomResultService;
 use App\Http\Controllers\Controller;
-
-
+use Illuminate\Http\RedirectResponse;
 
 class RoomController extends Controller
 {
@@ -24,7 +24,7 @@ class RoomController extends Controller
     /**
      * Display info page
     */
-    public function indexInfoPage()
+    public function indexInfoPage(): View
     {
         $current_room_data = Room::where('id', session()->get('current_room'))->get()->first();
         $current_room_members_count = RoomMember::where('room_id', session()->get('current_room'))->get()->count();
@@ -33,7 +33,7 @@ class RoomController extends Controller
     }
 
     /* Display settings page */
-    public function indexSettingsPage()
+    public function indexSettingsPage(): View
     {
         $current_room_data = Room::where('id', session()->get('current_room'))->get()->first();
         $current_room_members_count = RoomMember::where('room_id', session()->get('current_room'))->get()->count();
@@ -44,7 +44,7 @@ class RoomController extends Controller
     /**
      * Room info Update
      */
-    public function roomInfoUpdate()
+    public function roomInfoUpdate(): RedirectResponse
     {
         $roomName = $_POST['roomName'];
         $roomLink = $_POST['roomLink'];
@@ -64,7 +64,7 @@ class RoomController extends Controller
     /**
      * Display results page
      */
-    public function indexResultsPage()
+    public function indexResultsPage(): View
     {
         $this->roomResultService->setCurrentRoom(session()->get('current_room'));
         $this->roomResultService->prepareResults();

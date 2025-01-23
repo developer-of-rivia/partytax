@@ -7,9 +7,9 @@
             <a href="{{ route('dashboard.create-page') }}" class="partytax__button mb-2">
                 Создать комнату
             </a>
-            <a href="{{ route('dashboard.subscribers.add-page') }}" class="partytax__button">
+            {{-- <a href="{{ route('dashboard.subscribers.add-page') }}" class="partytax__button">
                 Подписаться на комнату
-            </a>
+            </a> --}}
         </div>
         <div class="partytax__rooms">
             <h5 class="mb-4">Я создатель в этих комнатах:</h5>

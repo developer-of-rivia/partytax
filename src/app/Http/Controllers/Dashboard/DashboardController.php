@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Actions\Room\RoomLinkCreator;
+use Illuminate\Http\RedirectResponse;
 use App\Actions\Dashboard\SetCurrentRoom;
 
 
@@ -65,19 +66,21 @@ class DashboardController extends Controller
     {
         $changeRoomAction->setChoisenRoomID($id);
         $changeRoomAction->handle();
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard.all-rooms');
     }
 
-
-
-
-    // создание комнаты
+    /**
+     * Display create room page
+     */
     public function indexCreatePage()
     {
         return view('dashboard.create', ['pageName' => 'Создать комнату']);
     }
 
-    public function createRoom(Request $request, RoomLinkCreator $roomLinkCreator)
+    /**
+     * Create Room
+     */
+    public function createRoom(Request $request, RoomLinkCreator $roomLinkCreator): RedirectResponse
     {
         $createdRoom = Room::create([
             'name' => $request->get('room-name'),
@@ -87,16 +90,8 @@ class DashboardController extends Controller
         ]);
 
         session()->put('current_room', $createdRoom->id);
-        return redirect()->route('dashboard.home');
+        return redirect()->route('dashboard.all-rooms');
     }
-
-    // перестать отслеживать
-    public function forgetRoom($id)
-    {
-        RoomMember::where('room_id', $id)->update(['relationships_id' => null]);
-        return redirect()->route('dashboard');
-    }
-
 
 
 

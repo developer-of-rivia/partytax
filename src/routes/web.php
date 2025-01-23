@@ -31,25 +31,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [DashboardController::class, 'indexHomePage'])->name('dashboard.home');
 
         Route::group(['prefix' => 'room'], function(){
-            // все комнаты
             Route::get('/all-rooms', [DashboardController::class, 'indexAllRoomsPage'])->name('dashboard.all-rooms');
-            // создание комнаты
             Route::get('/create', [DashboardController::class, 'indexCreatePage'])->name('dashboard.create-page');
             Route::post('/create', [DashboardController::class, 'createRoom'])->name('dashboard.create');
-            // смена комнаты
             Route::get('/change/{id}', [DashboardController::class, 'changeRoom'])->name('dashboard.room.change');
-
-            /* подписки на комнаты */
-            Route::get('/subscribers/add', [DashboardController::class, 'indexSubscribersAddPage'])->name('dashboard.subscribers.add-page');
-            Route::post('/subscribers/add', [DashboardController::class, 'subscribersAdd'])->name('dashboard.subscribers.add');
-            Route::get('/subscribers/{id}/remove', [DashboardController::class, 'subscribersRemove'])->name('dashboard.room.subscribers.remove');
-
-
-            /* простые контроллеры для комнат */
-            Route::get('/info', [RoomController::class, 'indexInfo'])->name('dashboard.room.info');
-            Route::get('/results', [RoomController::class, 'indexResults'])->name('dashboard.room.results');
-            Route::get('/settings', [RoomController::class, 'indexSettings'])->name('dashboard.room.settings');
-            Route::post('/settings', [RoomController::class, 'roomUpdate'])->name('dashboard.room.update');
+            Route::get('/info', [RoomController::class, 'indexInfoPage'])->name('dashboard.room.info');
+            Route::get('/results', [RoomController::class, 'indexResultsPage'])->name('dashboard.room.results');
+            Route::get('/settings', [RoomController::class, 'indexSettingsPage'])->name('dashboard.room.settings');
+            Route::post('/settings', [RoomController::class, 'roomInfoUpdate'])->name('dashboard.room.update');
 
             /* members */
             Route::group(['prefix' => 'members'], function(){
@@ -71,7 +60,6 @@ Route::middleware('auth')->group(function () {
             /* expense-paiders */
             Route::get('/expenses/{id}/paiders', [PaidersController::class, 'index'])->name('expenses.paiders');
             Route::post('/expenses/{id}/paiders/update', [PaidersController::class, 'update'])->name('expenses.paiders.update');
-
         });
     });
 });

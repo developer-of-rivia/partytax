@@ -19,7 +19,7 @@
             </div>
             <div class="mb-4">
                 <label class="form-label">Описание комнаты</label>
-                <textarea class="form-control form-control-sm">{{ $roomData->description }}</textarea>
+                <textarea class="form-control form-control-sm" name="roomDescription">{{ $roomData->description }}</textarea>
             </div>
             <div class="mt-4 text-center">
                 <button type="submit" class="btn btn-primary w-full">Сохранить</button>
