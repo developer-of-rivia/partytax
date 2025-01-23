@@ -15,19 +15,21 @@ use App\Actions\Dashboard\SetCurrentRoom;
 
 class DashboardController extends Controller
 {
+
     public function homepage()
     {
-        return view('dashboard.home', ['pageName' => 'Home']);
+        return view('dashboard.home', ['pageName' => 'home']);
     }
+
 
     public function indexFavsPage()
     {
-        return view('dashboard.rooms.favs', ['pageName' => 'Избранные']);
+        return view('dashboard.favs', ['pageName' => 'Избранные']);
     }
 
     public function indexFavsAddPage()
     {
-        return view('dashboard.rooms.favs-add', ['pageName' => 'Добавление в избранные']);
+        return view('dashboard.favs-add', ['pageName' => 'Добавление в избранные']);
     }
 
 
@@ -49,7 +51,7 @@ class DashboardController extends Controller
         //     ->get();
 
 
-        return view('dashboard.rooms.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserSubscriber' => false, 'pageName' => 'Все комнаты']);
+        return view('dashboard.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserSubscriber' => false, 'pageName' => 'Все комнаты']);
     }
 
 
@@ -65,7 +67,7 @@ class DashboardController extends Controller
     {
         $changeRoomAction->setChoisenRoomID($id);
         $changeRoomAction->handle();
-        return redirect()->route('dashboard.rooms');
+        return redirect()->route('dashboard');
     }
 
     
@@ -99,14 +101,14 @@ class DashboardController extends Controller
         ]);
 
         session()->put('current_room', $createdRoom->id);
-        return redirect()->route('dashboard.rooms');
+        return redirect()->route('dashboard');
     }
 
     // перестать отслеживать
     public function forgetRoom($id)
     {
         RoomMember::where('room_id', $id)->update(['relationships_id' => null]);
-        return redirect()->route('dashboard.rooms');
+        return redirect()->route('dashboard');
     }
 
 
@@ -119,7 +121,7 @@ class DashboardController extends Controller
 
     public function indexSubscribersAddPage()
     {
-        return view('dashboard.rooms.subscribers', ['pageName' => 'Отслеживать комнату']);
+        return view('dashboard.subscribers', ['pageName' => 'Отслеживать комнату']);
     }
 
 
@@ -135,7 +137,7 @@ class DashboardController extends Controller
         $setCurrentRoom->setChoisenRoomID($requestRoom->id);
         $setCurrentRoom->handle();
 
-        return redirect()->route('dashboard.rooms');
+        return redirect()->route('dashboard');
     }
 
     
@@ -145,6 +147,6 @@ class DashboardController extends Controller
         
         session()->forget('current_room');
 
-        return redirect()->route('dashboard.rooms');
+        return redirect()->route('dashboard');
     }
 }

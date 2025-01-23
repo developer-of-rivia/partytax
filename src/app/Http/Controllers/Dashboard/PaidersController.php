@@ -32,7 +32,7 @@ class PaidersController extends Controller
             ->select('member_expenses.member_id', 'member_expenses.expense_id')
             ->get();
 
-        return view('dashboard.rooms.paiders', ['expenseNumber' => $this->paidersForExpensesNumber, 'roomMembers' => $currentRoomMembers, 'pageName' => 'Кто скидывается', 'currentExpensePaiders' => $currentExpensePaiders]);
+        return view('dashboard.paiders', ['expenseNumber' => $this->paidersForExpensesNumber, 'roomMembers' => $currentRoomMembers, 'pageName' => 'Кто скидывается', 'currentExpensePaiders' => $currentExpensePaiders]);
     }
 
 

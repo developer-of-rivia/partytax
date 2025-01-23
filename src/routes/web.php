@@ -20,8 +20,8 @@ use App\Http\Controllers\Dashboard\PaidersController;
 */
 
 
-
 Route::middleware('auth')->group(function () {
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -32,16 +32,16 @@ Route::middleware('auth')->group(function () {
 
         Route::group(['prefix' => 'room'], function(){
             // все комнаты
-            Route::get('/all-rooms', [DashboardController::class, 'indexRooms'])->name('dashboard.rooms');
+            Route::get('/all-rooms', [DashboardController::class, 'indexRooms'])->name('dashboard');
             // создание комнаты
             Route::get('/create', [DashboardController::class, 'indexCreatePage'])->name('dashboard.create-page');
-            Route::post('/create', [DashboardController::class, 'createRoom'])->name('dashboard.rooms.create');
+            Route::post('/create', [DashboardController::class, 'createRoom'])->name('dashboard.create');
             // смена комнаты
             Route::get('/change/{id}', [DashboardController::class, 'changeRoom'])->name('dashboard.room.change');
 
             /* подписки на комнаты */
-            Route::get('/subscribers/add', [DashboardController::class, 'indexSubscribersAddPage'])->name('dashboard.rooms.subscribers.add-page');
-            Route::post('/subscribers/add', [DashboardController::class, 'subscribersAdd'])->name('dashboard.rooms.subscribers.add');
+            Route::get('/subscribers/add', [DashboardController::class, 'indexSubscribersAddPage'])->name('dashboard.subscribers.add-page');
+            Route::post('/subscribers/add', [DashboardController::class, 'subscribersAdd'])->name('dashboard.subscribers.add');
             Route::get('/subscribers/{id}/remove', [DashboardController::class, 'subscribersRemove'])->name('dashboard.room.subscribers.remove');
 
 

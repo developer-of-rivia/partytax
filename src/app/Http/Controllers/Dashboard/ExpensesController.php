@@ -15,12 +15,12 @@ class ExpensesController extends Controller
     {
         $thisRoomExpenses = Expense::where('room_id', session()->get('current_room'))->get();
 
-        return view('dashboard.rooms.expenses',  ['pageName' => 'Траты', 'RoomExpenses' => $thisRoomExpenses]);
+        return view('dashboard.expenses',  ['pageName' => 'Траты', 'RoomExpenses' => $thisRoomExpenses]);
     }
 
     public function create()
     {
-        return view('dashboard.rooms.expenses-add', ['pageName' => 'Добавить трату']);
+        return view('dashboard.expenses-add', ['pageName' => 'Добавить трату']);
     }
 
     public function store(FindExpensePriceWillStore $findExpensePriceWillStore)
@@ -51,7 +51,7 @@ class ExpensesController extends Controller
 
         $contributorsList = RoomMember::whereIn('id', $contributorsFor2)->get();
 
-        return view('dashboard.rooms.expenses-show', ['pageName' => 'Редактирование товара', 'currentExpense' => $showableExpense, 'contributorsList' => $contributorsList]);
+        return view('dashboard.expenses-show', ['pageName' => 'Редактирование товара', 'currentExpense' => $showableExpense, 'contributorsList' => $contributorsList]);
     }
 
     public function remove($id)

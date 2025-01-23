@@ -14,14 +14,14 @@ class MemberController extends Controller
     {
         $thisPageMembers = RoomMember::where('room_id', session('current_room'))->get();
 
-        return view('dashboard.rooms.members', ['members' => $thisPageMembers, 'pageName' => 'Участники']);
+        return view('dashboard.members', ['members' => $thisPageMembers, 'pageName' => 'Участники']);
     }
 
 
 
     public function addMemberPage()
     {
-        return view('dashboard.rooms.members-add', ['pageName' => 'Добавить участника']);
+        return view('dashboard.members-add', ['pageName' => 'Добавить участника']);
     }
 
 

@@ -18,7 +18,7 @@ class RoomController extends Controller
         $current_room_data = Room::where('id', session()->get('current_room'))->get()->first();
         $current_room_members_count = RoomMember::where('room_id', session()->get('current_room'))->get()->count();
 
-        return view('dashboard.rooms.main', ['pageName' => 'Информация о комнате', 'roomData' => $current_room_data, 'membersCount' => $current_room_members_count]);
+        return view('dashboard.main', ['pageName' => 'Информация о комнате', 'roomData' => $current_room_data, 'membersCount' => $current_room_members_count]);
     }
 
     /* results */
@@ -56,12 +56,12 @@ class RoomController extends Controller
             $allMembersResults[$member->name] = $hisResult;
         }
 
-        return view('dashboard.rooms.results',  ['pageName' => 'Результаты', 'allMembersResults' => $allMembersResults]);
+        return view('dashboard.results',  ['pageName' => 'Результаты', 'allMembersResults' => $allMembersResults]);
     }
 
     /* indexSettings */
     public function indexSettings()
     {
-        return view('dashboard.rooms.settings',  ['pageName' => 'Настройки комнаты']);
+        return view('dashboard.settings',  ['pageName' => 'Настройки комнаты']);
     }
 }

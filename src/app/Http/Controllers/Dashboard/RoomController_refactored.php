@@ -15,7 +15,7 @@ class RoomController extends Controller
     public function indexResults()
     {
         $this->prepareResults();
-        return view('dashboard.rooms.results',  ['pageName' => 'Результаты', 'allMembersResults' => $this->getMemberResults()]);
+        return view('dashboard.results',  ['pageName' => 'Результаты', 'allMembersResults' => $this->getMemberResults()]);
     }
 
     public function getMemberResults(): array
