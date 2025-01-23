@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\RoomController;
 use App\Http\Controllers\Dashboard\ExpensesController;
@@ -28,11 +28,11 @@ Route::middleware('auth')->group(function () {
 
     // dashboard
     Route::group(['prefix' => 'dashboard', 'middleware' => 'generateDashboardBreadcrumbs'], function(){
-        Route::get('/', [DashboardController::class, 'homepage'])->name('dashboard.home');
+        Route::get('/', [DashboardController::class, 'indexHomePage'])->name('dashboard.home');
 
         Route::group(['prefix' => 'room'], function(){
             // все комнаты
-            Route::get('/all-rooms', [DashboardController::class, 'indexRooms'])->name('dashboard');
+            Route::get('/all-rooms', [DashboardController::class, 'indexAllRoomsPage'])->name('dashboard.all-rooms');
             // создание комнаты
             Route::get('/create', [DashboardController::class, 'indexCreatePage'])->name('dashboard.create-page');
             Route::post('/create', [DashboardController::class, 'createRoom'])->name('dashboard.create');

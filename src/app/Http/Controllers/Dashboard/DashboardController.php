@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Room;
+use Illuminate\View\View;
 use App\Models\RoomMember;
 use Illuminate\Http\Request;
-use App\Models\roomSubscribers;
-use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Actions\Room\RoomLinkCreator;
@@ -15,29 +14,34 @@ use App\Actions\Dashboard\SetCurrentRoom;
 
 class DashboardController extends Controller
 {
-
-    public function homepage()
+    /**
+     * Display dashboard home page
+     */
+    public function indexHomePage(): View
     {
         return view('dashboard.home', ['pageName' => 'home']);
     }
 
-
-    public function indexFavsPage()
+    /**
+     * Display favorites page
+     */
+    public function indexFavoritesPage(): View
     {
         return view('dashboard.favs', ['pageName' => 'Избранные']);
     }
 
-    public function indexFavsAddPage()
+    /**
+     * Display favorites add page
+     */
+    public function indexFavoritesAddPage(): View
     {
         return view('dashboard.favs-add', ['pageName' => 'Добавление в избранные']);
     }
 
-
-
-
-
-
-    public function indexRooms()
+    /**
+     * Display all rooms page
+     */
+    public function indexAllRoomsPage(): View
     {
         // dd(session()->all());
 
@@ -54,35 +58,17 @@ class DashboardController extends Controller
         return view('dashboard.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserSubscriber' => false, 'pageName' => 'Все комнаты']);
     }
 
-
-
-
-
-
-
-
-
-
-    public function changeRoom(SetCurrentRoom $changeRoomAction, $id)
+    /**
+     * Change current room session
+     */
+    public function changeRoom(SetCurrentRoom $changeRoomAction, $id): RedirectResponse
     {
         $changeRoomAction->setChoisenRoomID($id);
         $changeRoomAction->handle();
         return redirect()->route('dashboard');
     }
 
-    
 
-
-
-    public function indexEnterPage()
-    {
-        return view('dashboard.enter');
-    }
-
-    public function enter()
-    {
-        
-    }
 
 
     // создание комнаты
@@ -119,34 +105,34 @@ class DashboardController extends Controller
     /**/
 
 
-    public function indexSubscribersAddPage()
-    {
-        return view('dashboard.subscribers', ['pageName' => 'Отслеживать комнату']);
-    }
+    // public function indexSubscribersAddPage()
+    // {
+    //     return view('dashboard.subscribers', ['pageName' => 'Отслеживать комнату']);
+    // }
 
 
-    public function subscribersAdd(SetCurrentRoom $setCurrentRoom)
-    {
-        $requestRoom = Room::where('link', $_POST['roomLink'])->where('password', $_POST['roomPass'])->get()->first();
+    // public function subscribersAdd(SetCurrentRoom $setCurrentRoom)
+    // {
+    //     $requestRoom = Room::where('link', $_POST['roomLink'])->where('password', $_POST['roomPass'])->get()->first();
 
-        roomSubscribers::create([
-            'user_id' => Auth::user()->id,
-            'room_id' => $requestRoom->id,
-        ]);
+    //     roomSubscribers::create([
+    //         'user_id' => Auth::user()->id,
+    //         'room_id' => $requestRoom->id,
+    //     ]);
 
-        $setCurrentRoom->setChoisenRoomID($requestRoom->id);
-        $setCurrentRoom->handle();
+    //     $setCurrentRoom->setChoisenRoomID($requestRoom->id);
+    //     $setCurrentRoom->handle();
 
-        return redirect()->route('dashboard');
-    }
+    //     return redirect()->route('dashboard');
+    // }
 
     
-    public function subscribersRemove($id)
-    {
-        roomSubscribers::where('room_id', $id)->delete();
+    // public function subscribersRemove($id)
+    // {
+    //     roomSubscribers::where('room_id', $id)->delete();
         
-        session()->forget('current_room');
+    //     session()->forget('current_room');
 
-        return redirect()->route('dashboard');
-    }
+    //     return redirect()->route('dashboard');
+    // }
 }
