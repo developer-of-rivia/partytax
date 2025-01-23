@@ -203,6 +203,9 @@ body{
     align-items: center;
     margin-bottom: 10px;
 }
+.partytax__room-item-name{
+    font-size: 14px;
+}
 .partytax__room-item-delete{
     margin-left: 10px;
 }
@@ -337,4 +340,27 @@ body{
     width: 13px;
     margin-right: 5px;
     fill: #0d6efd;
+}
+
+
+
+/* unsub-btn */
+.unsub-btn{
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 8px;
+    text-decoration: underline;
+    background: none;
+}
+.unsub-btn svg{
+    stroke: tomato;
+    width: 16px;
+}
+.unsub-btn span{
+    font-size: 14px;
+    color: tomato;
+    position: relative;
+    top: -1px;
 }

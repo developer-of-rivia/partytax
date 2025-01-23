@@ -6,6 +6,7 @@ use App\Models\Room;
 use Illuminate\View\View;
 use App\Models\RoomMember;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Actions\Room\RoomLinkCreator;
@@ -44,19 +45,17 @@ class DashboardController extends Controller
      */
     public function indexAllRoomsPage(): View
     {
-        // dd(session()->all());
-
         $roomsUserCreator = Room::where('creator_id', Auth::user()->id)->get();
 
-        // $roomsUserSubscriber = DB::table('room_subscribers')->where('user_id', Auth::user()->id)
-        //     ->join('rooms', function($join){
-        //         $join->on('room_subscribers.room_id', '=', 'rooms.id');
-        //     })
-        //     ->select('rooms.id', 'rooms.name')
-        //     ->get();
+        $roomsUserSubscriber = DB::table('room_subscribers')->where('user_id', Auth::user()->id)
+            ->join('rooms', function($join){
+                $join->on('room_subscribers.room_id', '=', 'rooms.id');
+            })
+            ->select('rooms.id', 'rooms.name')
+            ->get();
 
 
-        return view('dashboard.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserSubscriber' => false, 'pageName' => 'Все комнаты']);
+        return view('dashboard.all-rooms', ['roomsUserCreator' => $roomsUserCreator, 'roomsUserSubscriber' => $roomsUserSubscriber, 'pageName' => 'Все комнаты']);
     }
 
     /**
@@ -92,42 +91,4 @@ class DashboardController extends Controller
         session()->put('current_room', $createdRoom->id);
         return redirect()->route('dashboard.all-rooms');
     }
-
-
-
-    /**/
-    /**/
-    /**/
-
-
-    // public function indexSubscribersAddPage()
-    // {
-    //     return view('dashboard.subscribers', ['pageName' => 'Отслеживать комнату']);
-    // }
-
-
-    // public function subscribersAdd(SetCurrentRoom $setCurrentRoom)
-    // {
-    //     $requestRoom = Room::where('link', $_POST['roomLink'])->where('password', $_POST['roomPass'])->get()->first();
-
-    //     roomSubscribers::create([
-    //         'user_id' => Auth::user()->id,
-    //         'room_id' => $requestRoom->id,
-    //     ]);
-
-    //     $setCurrentRoom->setChoisenRoomID($requestRoom->id);
-    //     $setCurrentRoom->handle();
-
-    //     return redirect()->route('dashboard');
-    // }
-
-    
-    // public function subscribersRemove($id)
-    // {
-    //     roomSubscribers::where('room_id', $id)->delete();
-        
-    //     session()->forget('current_room');
-
-    //     return redirect()->route('dashboard');
-    // }
 }

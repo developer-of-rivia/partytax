@@ -1,12 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Profile\ProfileController;
-use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\RoomController;
-use App\Http\Controllers\Dashboard\ExpensesController;
+use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Dashboard\MemberController;
 use App\Http\Controllers\Dashboard\PaidersController;
+use App\Http\Controllers\Dashboard\ExpensesController;
+use App\Http\Controllers\Dashboard\DashboardController;
+use App\Http\Controllers\Dashboard\RoomSubscriberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +61,11 @@ Route::middleware('auth')->group(function () {
             /* expense-paiders */
             Route::get('/expenses/{id}/paiders', [PaidersController::class, 'index'])->name('expenses.paiders');
             Route::post('/expenses/{id}/paiders/update', [PaidersController::class, 'update'])->name('expenses.paiders.update');
+            
+            /* room subscribers */
+            Route::get('/subscribers/add-page', [RoomSubscriberController::class, 'indexSubscribersAddPage'])->name('dashboard.subscribers.add-page');
+            Route::post('/subscribers/add', [RoomSubscriberController::class, 'subscriberAdd'])->name('dashboard.subscribers.add');
+            Route::delete('/subscribers', [RoomSubscriberController::class, 'subscriberRemove'])->name('dashboard.subscribers.remove');
         });
     });
 });

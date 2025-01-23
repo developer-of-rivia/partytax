@@ -5,7 +5,7 @@
 @section('specific_content')
     <div class="home page">
         <div class="container">
-            <form action="{{ route('partytax-rooms-subscribers-add') }}" method="POST" class="mt-4">
+            <form action="{{ route('dashboard.subscribers.add') }}" method="POST" class="mt-4">
                 @csrf
                 <div class="mb-3"> 
                     <label for="formGroupExampleInput" class="form-label">Ссылка для обзора комнаты:</label>
