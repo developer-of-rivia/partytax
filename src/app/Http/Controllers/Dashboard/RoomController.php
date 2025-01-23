@@ -22,10 +22,9 @@ class RoomController extends Controller
     }
 
     /**
-     * 
-     */
-
-    public function indexInfo()
+     * Display info page
+    */
+    public function indexInfoPage()
     {
         $current_room_data = Room::where('id', session()->get('current_room'))->get()->first();
         $current_room_members_count = RoomMember::where('room_id', session()->get('current_room'))->get()->count();
@@ -33,18 +32,8 @@ class RoomController extends Controller
         return view('dashboard.main', ['pageName' => 'Информация о комнате', 'roomData' => $current_room_data, 'membersCount' => $current_room_members_count]);
     }
 
-    public function indexResults()
-    {
-        $this->roomResultService->setCurrentRoom(session()->get('current_room'));
-        $this->roomResultService->prepareResults();
-
-        return view('dashboard.results',  ['pageName' => 'Результаты', 'allMembersResults' => $this->roomResultService->getMemberResults()]);
-    }
-
-
-
-    /* indexSettings */
-    public function indexSettings()
+    /* Display settings page */
+    public function indexSettingsPage()
     {
         $current_room_data = Room::where('id', session()->get('current_room'))->get()->first();
         $current_room_members_count = RoomMember::where('room_id', session()->get('current_room'))->get()->count();
@@ -52,9 +41,10 @@ class RoomController extends Controller
         return view('dashboard.settings',  ['pageName' => 'Настройки комнаты', 'roomData' => $current_room_data, 'membersCount' => $current_room_members_count]);
     }
 
-
-
-    public function roomUpdate()
+    /**
+     * Room info Update
+     */
+    public function roomInfoUpdate()
     {
         $roomName = $_POST['roomName'];
         $roomLink = $_POST['roomLink'];
@@ -69,5 +59,16 @@ class RoomController extends Controller
         ]);
 
         return redirect()->route('dashboard.room.info');
+    }
+
+    /**
+     * Display results page
+     */
+    public function indexResultsPage()
+    {
+        $this->roomResultService->setCurrentRoom(session()->get('current_room'));
+        $this->roomResultService->prepareResults();
+
+        return view('dashboard.results',  ['pageName' => 'Результаты', 'allMembersResults' => $this->roomResultService->getMemberResults()]);
     }
 }

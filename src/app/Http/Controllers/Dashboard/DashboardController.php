@@ -87,7 +87,7 @@ class DashboardController extends Controller
         ]);
 
         session()->put('current_room', $createdRoom->id);
-        return redirect()->route('dashboard');
+        return redirect()->route('dashboard.home');
     }
 
     // перестать отслеживать
