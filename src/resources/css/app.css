@@ -268,12 +268,13 @@ body{
 }
 .expense-item__edit{
     text-decoration: none;
+    padding: 2px;
+    background: #dee2e6;
+    border-radius: 5px;
 }
 .expense-item__edit svg{
-    width: 15px;
-}
-.expense-item__remove{
-    margin-left: 5px;
+    width: 20px;
+    stroke: #111;
 }
 .expense-item__remove svg{
     width: 15px;
@@ -287,18 +288,23 @@ body{
     border-radius: 4px;
     color: #fff;
 }
-.expenses-group-edit svg{
-    width: 15px;
-}
 .expenses__item-name{
     font-size: 14px;
 }
-.expenses__item-buttons{
-    display: flex;
-    flex-direction: column;
+.expenses-box{
+    border-bottom: 1px solid #dee2e6;
+    border-radius: 5px;
 }
-.expenses__item-price{
-    vertical-align: middle;
+.expense-item{
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-bottom: none;
+}
+.expenses-box .expense-item:first-child{
+    border-radius: 5px 5px 0 0;
+}
+.expenses-box .expense-item:last-child{
+    border-bottom: none;
 }
 
 /* room info */
