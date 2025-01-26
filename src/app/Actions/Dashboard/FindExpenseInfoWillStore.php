@@ -31,7 +31,7 @@ class FindExpenseInfoWillStore
         if($this->postData['expenseType'] == 'expenseOne')
         {
             $this->formula = 'expenseOne';
-            $this->price = $this->postData['price'] * $this->postData['expense-count'];
+            $this->price = $this->postData['price'] * $this->postData['count'];
         }
         elseif($this->postData['expenseType'] == 'expenseAll')
         {

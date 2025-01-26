@@ -7,12 +7,13 @@
         <div class="container">
             <form action="{{ route('dashboard.room.expenses.update', $currentExpense->id) }}" method="POST">
                 @csrf
+                @method('put')
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Пачка чипсов Lays" name="expense-name" value="{{ $currentExpense->name }}">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Пачка чипсов Lays" name="name" value="{{ $currentExpense->name }}">
                     <label for="floatingInput">Название траты</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="2" name="expense-count" value="{{ $currentExpense->count }}">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="2" name="count" value="{{ $currentExpense->count }}">
                     <label for="floatingInput">Количество товара (шт)</label>
                 </div>
                 <div class="form-check">
@@ -31,7 +32,7 @@
                     <input type="text" class="form-control" id="floatingInput" placeholder="Стоимость" name="price" value="{{ $currentExpense->price }}">
                     <label for="floatingInput">Стоимость</label>
                 </div>
-                <button type="submit" class="btn btn-primary">Добавить</button>
+                <button type="submit" class="btn btn-primary">Обновить</button>
             </form>
         </div>
     </div>

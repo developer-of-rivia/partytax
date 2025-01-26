@@ -26,6 +26,9 @@
                     <div class="expenses__item-name flex-grow-1">
                         {{ $expense->name }}
                     </div>
+                    <span class="badge text-bg-warning">
+                        {{ $expense->count }}шт
+                    </span>
                     <span class="badge text-bg-success">
                         {{ $expense->price }}р
                     </span>

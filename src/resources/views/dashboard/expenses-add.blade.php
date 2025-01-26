@@ -8,11 +8,11 @@
             <form action="{{ route('dashboard.room.expenses.create') }}" method="POST">
                 @csrf
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="Пачка чипсов Lays" name="expense-name">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Пачка чипсов Lays" name="name">
                     <label for="floatingInput">Название траты</label>
                 </div>
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="floatingInput" placeholder="2" name="expense-count">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="2" name="count">
                     <label for="floatingInput">Количество товара (шт)</label>
                 </div>
                 <div class="form-check">
