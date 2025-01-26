@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'generateDashboardBreadcrumbs' => \App\Http\Middleware\GenerateDashboardBreadcrumbs::class,
-        'canRoomEditCheck' => \App\Http\Middleware\canRoomEditCheck::class,
+        'canRoomEditCheck' => \App\Http\Middleware\CanRoomEditCheck::class,
+        'canRoomPageEnter' => \App\Http\Middleware\CanRoomPageEnter::class,
     ];
 }

@@ -10,10 +10,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-    public function rooms()
-    {
-        return $this->hasMany(Room::class);
-    }
+    // public function rooms()
+    // {
+    //     return $this->hasMany(Room::class);
+    // }
 
 
     /** @use HasFactory<\Database\Factories\UserFactory> */

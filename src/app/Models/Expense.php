@@ -8,10 +8,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Expense extends Model
 {
-    public function membersExpenses()
-    {
-        return $this->hasMany(MemberExpense::class);
-    }
+    // public function membersExpenses()
+    // {
+    //     return $this->hasMany(MemberExpense::class);
+    // }
 
     use HasFactory;
 

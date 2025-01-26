@@ -15,7 +15,7 @@
             </div>
             <div class="mb-4">
                 <label class="form-label">Пароль для обзора</label>
-                <input type="password" class="form-control form-control-sm" value="{{ $roomData->password }}" name="roomPassword">
+                <input type="text" class="form-control form-control-sm" value="{{ $roomData->password }}" name="roomPassword">
             </div>
             <div class="mb-4">
                 <label class="form-label">Описание комнаты</label>

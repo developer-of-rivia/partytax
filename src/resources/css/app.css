@@ -22,7 +22,7 @@ body{
     padding-bottom: 50px;
     display: flex;
     flex-direction: column;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .container_centered{
     display: flex;
@@ -301,10 +301,13 @@ body{
     border-bottom: none;
 }
 .expenses-box .expense-item:first-child{
-    border-radius: 5px 5px 0 0;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
 }
 .expenses-box .expense-item:last-child{
     border-bottom: none;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
 }
 
 /* room info */

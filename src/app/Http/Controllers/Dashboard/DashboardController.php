@@ -65,7 +65,7 @@ class DashboardController extends Controller
     {
         $changeRoomAction->setChoisenRoomID($id);
         $changeRoomAction->handle();
-        return redirect()->route('dashboard.all-rooms');
+        return redirect()->route('dashboard.room.info');
     }
 
     /**
@@ -86,9 +86,10 @@ class DashboardController extends Controller
             'password' => $request->get('room-pass'),
             'link' => $roomLinkCreator->handle(),
             'creator_id' => Auth::user()->id,
+            'description' => 'Описание комнаты'
         ]);
 
         session()->put('current_room', $createdRoom->id);
-        return redirect()->route('dashboard.all-rooms');
+        return redirect()->route('dashboard.room.info');
     }
 }

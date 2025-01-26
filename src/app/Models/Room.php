@@ -8,22 +8,22 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Room extends Model
 {
-    public function subscribers()
-    {
-        return $this->hasMany(RoomSubscriber::class);
-    }
+    // public function subscribers()
+    // {
+    //     return $this->hasMany(RoomSubscriber::class);
+    // }
 
-    public function members()
-    {
-        return $this->hasMany(RoomMember::class);
-    }
+    // public function members()
+    // {
+    //     return $this->hasMany(RoomMember::class);
+    // }
 
-    public function expenses()
-    {
-        return $this->hasMany(Expense::class);
-    }
+    // public function expenses()
+    // {
+    //     return $this->hasMany(Expense::class);
+    // }
 
     use HasFactory;
 
-    protected $fillable = ['link', 'password', 'name', 'creator_id'];
+    protected $fillable = ['link', 'password', 'name', 'creator_id', 'description'];
 }
