@@ -5,7 +5,7 @@
 @section('specific_content')
     <div class="partytax page">
         <div class="container">
-            <form action="{{ route('dashboard.room.mebmers.add') }}" method="POST" class="add-members-form">
+            <form action="{{ route('dashboard.room.members.add') }}" method="POST" class="add-members-form">
                 @csrf
                 <div class="input-row mb-2">
                     <input type="text" placeholder="Имя + фамилия/прозвище" class="input form-control" name="room-member-name">

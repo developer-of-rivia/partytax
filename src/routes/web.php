@@ -43,11 +43,12 @@ Route::middleware('auth')->group(function () {
 
             /* members */
             Route::group(['prefix' => 'members'], function(){
-                Route::get('/', [MemberController::class, 'index'])->name('dashboard.room.mebmers');
-                Route::get('/add', [MemberController::class, 'create'])->name('dashboard.room.mebmers.add-page')->middleware('canRoomPageEnter');
-                Route::post('/add', [MemberController::class, 'store'])->name('dashboard.room.mebmers.add');
-                Route::get('/edit/{id}', [MemberController::class, 'edit'])->name('dashboard.room.members.edit');
-                Route::get('/delete/{id}', [MemberController::class, 'destroy'])->name('dashboard.room.mebmers.remove');
+                Route::get('/', [MemberController::class, 'index'])->name('dashboard.room.members');
+                Route::get('/add', [MemberController::class, 'create'])->name('dashboard.room.members.add-page')->middleware('canRoomPageEnter');
+                Route::post('/add', [MemberController::class, 'store'])->name('dashboard.room.members.add');
+                Route::get('/edit/{id}', [MemberController::class, 'edit'])->name('dashboard.room.members.edit')->middleware('canRoomPageEnter');
+                Route::put('/{id}', [MemberController::class, 'update'])->name('dashboard.room.members.update');
+                Route::get('/delete/{id}', [MemberController::class, 'destroy'])->name('dashboard.room.members.remove');
             });
 
             /* expenses */
