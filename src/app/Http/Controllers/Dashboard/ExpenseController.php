@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Actions\Dashboard\FindExpensePriceWillStore;
 
-class ExpensesController extends Controller
+class ExpenseController extends Controller
 {    
     public function index()
     {

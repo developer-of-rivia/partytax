@@ -5,7 +5,7 @@ use App\Http\Controllers\Dashboard\RoomController;
 use App\Http\Controllers\Profile\ProfileController;
 use App\Http\Controllers\Dashboard\MemberController;
 use App\Http\Controllers\Dashboard\PaidersController;
-use App\Http\Controllers\Dashboard\ExpensesController;
+use App\Http\Controllers\Dashboard\ExpenseController;
 use App\Http\Controllers\Dashboard\DashboardController;
 use App\Http\Controllers\Dashboard\RoomSubscriberController;
 
@@ -48,18 +48,14 @@ Route::middleware('auth')->group(function () {
                 Route::post('/add', [MemberController::class, 'store'])->name('dashboard.room.mebmers.add');
                 Route::get('/edit/{id}', [MemberController::class, 'edit'])->name('dashboard.room.members.edit');
                 Route::get('/delete/{id}', [MemberController::class, 'destroy'])->name('dashboard.room.mebmers.remove');
-
-                
-                Route::get('/favs', [MemberController::class, 'indexFavsPage'])->name('dashboard.room.members.favs');
-                Route::get('/favs/add', [MemberController::class, 'indexFavsAddPage'])->name('dashboard.room.members.favs.add-page');
             });
 
             /* expenses */
-            Route::get('/expenses', [ExpensesController::class, 'index'])->name('dashboard.room.expenses');
-            Route::get('/expenses/create', [ExpensesController::class, 'create'])->name('dashboard.room.expenses.create')->middleware('canRoomPageEnter');
-            Route::post('/expenses/create', [ExpensesController::class, 'store'])->name('dashboard.room.expenses.store');
-            Route::get('/expenses/{id}', [ExpensesController::class, 'show'])->name('dashboard.room.expenses.show');
-            Route::get('/expenses/{id}/remove', [ExpensesController::class, 'remove'])->name('dashboard.room.expenses.remove');
+            Route::get('/expenses', [ExpenseController::class, 'index'])->name('dashboard.room.expenses');
+            Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('dashboard.room.expenses.create')->middleware('canRoomPageEnter');
+            Route::post('/expenses/create', [ExpenseController::class, 'store'])->name('dashboard.room.expenses.store');
+            Route::get('/expenses/{id}', [ExpenseController::class, 'show'])->name('dashboard.room.expenses.show');
+            Route::get('/expenses/{id}/remove', [ExpenseController::class, 'remove'])->name('dashboard.room.expenses.remove');
 
             /* expense-paiders */
             Route::get('/expenses/{id}/paiders', [PaidersController::class, 'index'])->name('expenses.paiders')->middleware('canRoomPageEnter');
