@@ -51,6 +51,8 @@ class ExpenseController extends Controller
 
         $contributorsList = RoomMember::whereIn('id', $contributorsFor2)->get();
 
+        // dd($showableExpense);
+
         return view('dashboard.expenses-edit', ['pageName' => 'Редактирование товара', 'currentExpense' => $showableExpense, 'contributorsList' => $contributorsList]);
     }
 

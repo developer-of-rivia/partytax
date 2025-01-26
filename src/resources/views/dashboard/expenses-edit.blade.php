@@ -3,51 +3,36 @@
 
 
 @section('specific_content')
-    <div class="container expenses-show">
-        <div class="mb-3">
-            <label class="form-label">Название траты</label>
-            <input type="text" class="form-control form-control-sm" value="{{ $currentExpense->name }}">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Количество товара</label>
-            <input type="text" class="form-control form-control-sm" value="{{ $currentExpense->count }}">
-        </div>
-        <div class="mb-3">
-            <label class="form-label">Цена товара за всё количество</label>
-            <input type="text" class="form-control form-control-sm" value="{{ $currentExpense->price }}">
-        </div>
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary w-full btn-sm">Сохранить</button>
-        </div>
-        {{-- <hr>
-        <div class="mt-5">
-            <h4 class="d-flex justify-content-between">
-                <span>
-                    Кто скидывается?
-                </span>
-                @if(session()->get('canIEditThisRoom'))
-                    <a href="{{ route('expenses.paiders', $currentExpense->id) }}" class="btn btn-link btn-sm">Выбрать</a>
-                @endif
-            </h4>
-            @if($contributorsList->count() == 0)
-                <div class="alert alert-secondary" role="alert">
-                    Пока никто. Зря купили?
+    <div class="partytax page">
+        <div class="container">
+            <form action="{{ route('dashboard.room.expenses.create') }}" method="POST">
+                @csrf
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Пачка чипсов Lays" name="expense-name" value="{{ $currentExpense->name }}">
+                    <label for="floatingInput">Название траты</label>
                 </div>
-            @else
-                <ul class="list-group list-group-flush">
-                    @foreach ($contributorsList as $item)
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <span>
-                                {{ $item->name }}
-                            </span>
-
-                            <span class="badge text-bg-primary rounded-pill ml-auto">
-                                ✓
-                            </span>
-                        </li>
-                    @endforeach
-                </ul>
-            @endif
-        </div> --}}
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="2" name="expense-count" value="{{ $currentExpense->count }}">
+                    <label for="floatingInput">Количество товара (шт)</label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="expenseType" id="expenseAll" value="expenseAll">
+                    <label class="form-check-label" for="expenseAll">
+                        Указать стоимость за всё количество
+                    </label>
+                  </div>
+                  <div class="form-check mb-3">
+                    <input class="form-check-input" type="radio" name="expenseType" id="expenseOne" value="expenseOne">
+                    <label class="form-check-label" for="expenseOne">
+                        Указать стоимость за <span>1</span> товар
+                    </label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="floatingInput" placeholder="Стоимость" name="price" value="{{ $currentExpense->price }}">
+                    <label for="floatingInput">Стоимость</label>
+                </div>
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
     </div>
 @endsection
