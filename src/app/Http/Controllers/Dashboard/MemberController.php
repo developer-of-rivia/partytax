@@ -71,7 +71,6 @@ class MemberController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('member_expenses')->where('member_id', $id)->delete();
         RoomMember::where('id', $id)->delete();
 
         return redirect()->route('dashboard.room.members');

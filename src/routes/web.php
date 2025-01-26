@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
                 Route::post('/add', [MemberController::class, 'store'])->name('dashboard.room.members.add');
                 Route::get('/edit/{id}', [MemberController::class, 'edit'])->name('dashboard.room.members.edit')->middleware('canRoomPageEnter');
                 Route::put('/{id}', [MemberController::class, 'update'])->name('dashboard.room.members.update');
-                Route::get('/delete/{id}', [MemberController::class, 'destroy'])->name('dashboard.room.members.remove');
+                Route::get('/{id}/destroy', [MemberController::class, 'destroy'])->name('dashboard.room.members.destroy');
             });
 
             /* expenses */
