@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 
 class MemberController extends Controller
 {
-    public function indexMembers()
+    public function index()
     {
         $thisPageMembers = RoomMember::where('room_id', session('current_room'))->get();
 
@@ -19,15 +19,21 @@ class MemberController extends Controller
 
 
 
-    public function addMemberPage()
+    public function create()
     {
         return view('dashboard.members-add', ['pageName' => 'Добавить участника']);
     }
 
 
 
+    public function edit($id)
+    {
+        return view('dashboard.members-edit', ['id'=> $id, 'pageName' => 'Редактировать участника']);
+    }
 
-    public function addMember(Request $request)
+
+
+    public function store(Request $request)
     {
         RoomMember::create([
             'name' => $request->get('room-member-name'),
@@ -40,7 +46,7 @@ class MemberController extends Controller
 
 
 
-    public function removeMember($id)
+    public function destroy($id)
     {
         DB::table('member_expenses')->where('member_id', $id)->delete();
         RoomMember::where('id', $id)->delete();

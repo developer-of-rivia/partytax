@@ -43,10 +43,13 @@ Route::middleware('auth')->group(function () {
 
             /* members */
             Route::group(['prefix' => 'members'], function(){
-                Route::get('/', [MemberController::class, 'indexMembers'])->name('dashboard.room.mebmers');
-                Route::get('/add', [MemberController::class, 'addMemberPage'])->name('dashboard.room.mebmers.add-page')->middleware('canRoomPageEnter');
-                Route::post('/add', [MemberController::class, 'addMember'])->name('dashboard.room.mebmers.add');
-                Route::get('/delete/{id}', [MemberController::class, 'removeMember'])->name('dashboard.room.mebmers.remove');
+                Route::get('/', [MemberController::class, 'index'])->name('dashboard.room.mebmers');
+                Route::get('/add', [MemberController::class, 'create'])->name('dashboard.room.mebmers.add-page')->middleware('canRoomPageEnter');
+                Route::post('/add', [MemberController::class, 'store'])->name('dashboard.room.mebmers.add');
+                Route::get('/edit/{id}', [MemberController::class, 'edit'])->name('dashboard.room.members.edit');
+                Route::get('/delete/{id}', [MemberController::class, 'destroy'])->name('dashboard.room.mebmers.remove');
+
+                
                 Route::get('/favs', [MemberController::class, 'indexFavsPage'])->name('dashboard.room.members.favs');
                 Route::get('/favs/add', [MemberController::class, 'indexFavsAddPage'])->name('dashboard.room.members.favs.add-page');
             });
