@@ -19,7 +19,7 @@
         <div class="text-center">
             <button type="submit" class="btn btn-primary w-full btn-sm">Сохранить</button>
         </div>
-        <hr>
+        {{-- <hr>
         <div class="mt-5">
             <h4 class="d-flex justify-content-between">
                 <span>
@@ -48,6 +48,6 @@
                     @endforeach
                 </ul>
             @endif
-        </div>
+        </div> --}}
     </div>
 @endsection

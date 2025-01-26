@@ -38,7 +38,7 @@ class ExpenseController extends Controller
     }
 
 
-    public function show($id)
+    public function edit($id)
     {
         $showableExpense = Expense::where('id', $id)->get()->first();
         
@@ -51,7 +51,7 @@ class ExpenseController extends Controller
 
         $contributorsList = RoomMember::whereIn('id', $contributorsFor2)->get();
 
-        return view('dashboard.expenses-show', ['pageName' => 'Редактирование товара', 'currentExpense' => $showableExpense, 'contributorsList' => $contributorsList]);
+        return view('dashboard.expenses-edit', ['pageName' => 'Редактирование товара', 'currentExpense' => $showableExpense, 'contributorsList' => $contributorsList]);
     }
 
     public function remove($id)

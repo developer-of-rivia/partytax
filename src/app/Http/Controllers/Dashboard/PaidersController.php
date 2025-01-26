@@ -59,6 +59,6 @@ class PaidersController extends Controller
             ]);
         }
 
-        return redirect()->route('dashboard.room.expenses.show', $paidersFormPost['expenseNumber']);
+        return redirect()->route('expenses.paiders', $paidersFormPost['expenseNumber']);
     }
 }

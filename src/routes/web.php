@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
             Route::get('/expenses', [ExpenseController::class, 'index'])->name('dashboard.room.expenses');
             Route::get('/expenses/create', [ExpenseController::class, 'create'])->name('dashboard.room.expenses.create')->middleware('canRoomPageEnter');
             Route::post('/expenses/create', [ExpenseController::class, 'store'])->name('dashboard.room.expenses.store');
-            Route::get('/expenses/{id}', [ExpenseController::class, 'show'])->name('dashboard.room.expenses.show');
+            Route::get('/expenses/{id}', [ExpenseController::class, 'edit'])->name('dashboard.room.expenses.edit');
             Route::get('/expenses/{id}/remove', [ExpenseController::class, 'remove'])->name('dashboard.room.expenses.remove');
 
             /* expense-paiders */

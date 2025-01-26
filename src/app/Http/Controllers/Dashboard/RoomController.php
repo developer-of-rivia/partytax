@@ -32,7 +32,9 @@ class RoomController extends Controller
         return view('dashboard.main', ['pageName' => 'Информация о комнате', 'roomData' => $current_room_data, 'membersCount' => $current_room_members_count]);
     }
 
-    /* Display settings page */
+    /* 
+     * Display settings page
+     */
     public function indexSettingsPage(): View
     {
         $current_room_data = Room::where('id', session()->get('current_room'))->get()->first();
