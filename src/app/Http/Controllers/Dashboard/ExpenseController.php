@@ -7,7 +7,7 @@ use App\Models\RoomMember;
 use App\Models\MemberExpense;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Actions\Dashboard\FindExpensePriceWillStore;
+use App\Actions\Dashboard\FindExpenseInfoWillStore;
 
 class ExpenseController extends Controller
 {    
@@ -23,15 +23,17 @@ class ExpenseController extends Controller
         return view('dashboard.expenses-add', ['pageName' => 'Добавить трату']);
     }
 
-    public function store(FindExpensePriceWillStore $findExpensePriceWillStore)
+    public function store(FindExpenseInfoWillStore $findExpenseInfoWillStore)
     {
-        $PriceWillStore = $findExpensePriceWillStore->handle($_POST);
+        $findExpenseInfoWillStore->setPostData($_POST);
+        $findExpenseInfoWillStore->handle();
 
         Expense::create([
             'name' => $_POST['expense-name'],
             'room_id' => session()->get('current_room'),
-            'price' => $PriceWillStore,
+            'price' => $findExpenseInfoWillStore->getPrice(),
             'count' => $_POST['expense-count'],
+            'current_formula' => $findExpenseInfoWillStore->getFormula(),
         ]);
 
         return redirect()->route('dashboard.room.expenses');
@@ -41,19 +43,13 @@ class ExpenseController extends Controller
     public function edit($id)
     {
         $showableExpense = Expense::where('id', $id)->get()->first();
-        
-        $contributorsFor = MemberExpense::where('expense_id', $id)->get();
-        $contributorsFor2 = [];
 
-        foreach($contributorsFor as $contributor){
-            array_push($contributorsFor2, $contributor->member_id);
-        }
+        return view('dashboard.expenses-edit', ['pageName' => 'Редактирование товара', 'currentExpense' => $showableExpense]);
+    }
 
-        $contributorsList = RoomMember::whereIn('id', $contributorsFor2)->get();
+    public function update($id)
+    {
 
-        // dd($showableExpense);
-
-        return view('dashboard.expenses-edit', ['pageName' => 'Редактирование товара', 'currentExpense' => $showableExpense, 'contributorsList' => $contributorsList]);
     }
 
     public function remove($id)

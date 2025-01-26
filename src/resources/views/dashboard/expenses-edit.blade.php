@@ -5,7 +5,7 @@
 @section('specific_content')
     <div class="partytax page">
         <div class="container">
-            <form action="{{ route('dashboard.room.expenses.create') }}" method="POST">
+            <form action="{{ route('dashboard.room.expenses.update', $currentExpense->id) }}" method="POST">
                 @csrf
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="floatingInput" placeholder="Пачка чипсов Lays" name="expense-name" value="{{ $currentExpense->name }}">
@@ -16,13 +16,13 @@
                     <label for="floatingInput">Количество товара (шт)</label>
                 </div>
                 <div class="form-check">
-                    <input class="form-check-input" type="radio" name="expenseType" id="expenseAll" value="expenseAll">
+                    <input class="form-check-input" type="radio" name="expenseType" id="expenseAll" value="expenseAll" @if($currentExpense->current_formula == 'expenseAll') checked @endif>
                     <label class="form-check-label" for="expenseAll">
                         Указать стоимость за всё количество
                     </label>
                   </div>
                   <div class="form-check mb-3">
-                    <input class="form-check-input" type="radio" name="expenseType" id="expenseOne" value="expenseOne">
+                    <input class="form-check-input" type="radio" name="expenseType" id="expenseOne" value="expenseOne" @if($currentExpense->current_formula == 'expenseOne') checked @endif>
                     <label class="form-check-label" for="expenseOne">
                         Указать стоимость за <span>1</span> товар
                     </label>

@@ -15,5 +15,5 @@ class Expense extends Model
 
     use HasFactory;
 
-    protected $fillable = ['price', 'name', 'room_id', 'count'];
+    protected $fillable = ['price', 'name', 'room_id', 'count', 'current_formula'];
 }
