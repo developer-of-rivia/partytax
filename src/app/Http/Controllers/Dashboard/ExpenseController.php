@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Models\Expense;
 use App\Models\RoomMember;
+use Illuminate\Http\Request;
 use App\Models\MemberExpense;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Actions\Dashboard\FindExpenseInfoWillStore;
+use App\Http\Requests\Requests\Expense\ExpenseStoreRequest;
 
 class ExpenseController extends Controller
 {   
@@ -32,16 +34,16 @@ class ExpenseController extends Controller
     /**
      * Store newly created expense
      */
-    public function store(FindExpenseInfoWillStore $findExpenseInfoWillStore)
+    public function store(ExpenseStoreRequest $request, FindExpenseInfoWillStore $findExpenseInfoWillStore)
     {
-        $findExpenseInfoWillStore->setPostData($_POST);
+        $findExpenseInfoWillStore->setPostData($request->all());
         $findExpenseInfoWillStore->handle();
 
         Expense::create([
-            'name' => $_POST['name'],
+            'name' => $request->get('name'),
             'room_id' => session()->get('current_room'),
             'price' => $findExpenseInfoWillStore->getPrice(),
-            'count' => $_POST['count'],
+            'count' => $request->get('count'),
             'current_formula' => $findExpenseInfoWillStore->getFormula(),
         ]);
 
@@ -65,9 +67,9 @@ class ExpenseController extends Controller
     /**
      * Update expense
      */
-    public function update($id, FindExpenseInfoWillStore $findExpenseInfoWillStore)
+    public function update(Request $request, $id, FindExpenseInfoWillStore $findExpenseInfoWillStore)
     {   
-        $findExpenseInfoWillStore->setPostData($_POST);
+        $findExpenseInfoWillStore->setPostData($request->all());
         $findExpenseInfoWillStore->handle();
 
         $expense = Expense::findOrFail($id);
