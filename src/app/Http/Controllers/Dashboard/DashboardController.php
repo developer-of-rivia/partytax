@@ -25,22 +25,6 @@ class DashboardController extends Controller
     }
 
     /**
-     * Display favorites page
-     */
-    public function indexFavoritesPage(): View
-    {
-        return view('dashboard.favs', ['pageName' => 'Избранные']);
-    }
-
-    /**
-     * Display favorites add page
-     */
-    public function indexFavoritesAddPage(): View
-    {
-        return view('dashboard.favs-add', ['pageName' => 'Добавление в избранные']);
-    }
-
-    /**
      * Display all rooms page
      */
     public function indexAllRoomsPage(): View
