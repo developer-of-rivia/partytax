@@ -21,8 +21,18 @@ use App\Http\Controllers\Dashboard\RoomSubscriberController;
 */
 
 
-Route::middleware('auth')->group(function () {
+Route::get('/da', function(){
+    // return response()->json([
+    //     'name' => 'Abigail',
+    //     'state' => 'CA',
+    // ]);
 
+    return 'text';
+});
+
+
+
+Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

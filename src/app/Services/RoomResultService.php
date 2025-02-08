@@ -69,11 +69,19 @@ class RoomResultService
         return $expenseInfo;
     }
 
+    /**
+     * Сама логика подсчёта результата
+     */
     private function calculateContributorsPart($expenseInfo): int
     {
         $contributorsPart = $expenseInfo['price'] / $expenseInfo['contributorsCount'];
         $contributorsPart = (int)$contributorsPart;
 
         return $contributorsPart;
+    }
+
+    private function calculateContributorsPart2()
+    {
+        
     }
 }
