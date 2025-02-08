@@ -36,14 +36,24 @@ class RoomResultService
     }
 
     /**
-     * 
+     * methods
      */
 
+    /**
+     * В общий массив с результатами кладёт имя участника и его результат, 
+     * который считается через calculateMemberResult()
+     */
     private function collectMemberResults($member, $currentResult)
     {
         $this->allMembersResults[$member->name] = $currentResult;
     }
 
+
+    /**
+     * Берёт все траты участника и считает сколько он должен всего
+     * Каждая трата обрабатывается через функции getExpenseInfo, затем calculateContributorsPart
+     * Складывает все разультаты функции calculateContributorsPart в общий результат
+     */
     private function calculateMemberResult($memberID)
     {
         $hisExpenses = MemberExpense::where('member_id', $memberID)->get();
@@ -59,29 +69,29 @@ class RoomResultService
         return $hisResult;
     }
 
+    /**
+     * Берёт всю информацию о трате
+     */
     private function getExpenseInfo($expense): array
     {
         $expenseInfo = [];
 
         $expenseInfo['price'] = Expense::where('id', $expense->expense_id)->get()->first()->price;
         $expenseInfo['contributorsCount'] = MemberExpense::where('expense_id', $expense->expense_id)->get()->count();
+        $expenseInfo['payer'] = Expense::where('id', $expense->expense_id)->get()->first()->payer;
 
         return $expenseInfo;
     }
 
     /**
-     * Сама логика подсчёта результата
+     * Берёт трату и возвращает часть, которую должен скинуть
+     * каждый 
      */
     private function calculateContributorsPart($expenseInfo): int
     {
-        $contributorsPart = $expenseInfo['price'] / $expenseInfo['contributorsCount'];
-        $contributorsPart = (int)$contributorsPart;
+        $contributorsParts[$expenseInfo['payer']] = $expenseInfo['price'] / $expenseInfo['contributorsCount'];
+        $contributorsParts[$expenseInfo['payer']] = (int)$contributorsParts[$expenseInfo['payer']];
 
-        return $contributorsPart;
-    }
-
-    private function calculateContributorsPart2()
-    {
-        
+        return $contributorsParts[$expenseInfo['payer']];
     }
 }
