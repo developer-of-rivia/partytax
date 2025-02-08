@@ -52,18 +52,19 @@ class RoomResultService
     /**
      * Берёт все траты участника и считает сколько он должен всего
      * Каждая трата обрабатывается через функции getExpenseInfo, затем calculateContributorsPart
-     * Складывает все разультаты функции calculateContributorsPart в общий результат
+     * Берётся человек, который оплатил у каждой траты и нужная часть, посчитанная через calculateContributorsPart
+     * Идёт только к нему
      */
     private function calculateMemberResult($memberID)
     {
         $hisExpenses = MemberExpense::where('member_id', $memberID)->get();
-        $hisResult = 0;
+        $hisResult = [];
 
         foreach($hisExpenses as $expense){
             $thisExpenseInfo = $this->getExpenseInfo($expense);
             $contributorsPart = $this->calculateContributorsPart($thisExpenseInfo);
 
-            $hisResult += $contributorsPart;
+            $hisResult[$thisExpenseInfo['payer']] += $contributorsPart;
         }
 
         return $hisResult;
@@ -89,9 +90,17 @@ class RoomResultService
      */
     private function calculateContributorsPart($expenseInfo): int
     {
-        $contributorsParts[$expenseInfo['payer']] = $expenseInfo['price'] / $expenseInfo['contributorsCount'];
-        $contributorsParts[$expenseInfo['payer']] = (int)$contributorsParts[$expenseInfo['payer']];
+        $contributorsPart = $expenseInfo['price'] / $expenseInfo['contributorsCount'];
+        $contributorsPart = (int)$contributorsPart;
 
-        return $contributorsParts[$expenseInfo['payer']];
+        return $contributorsPart;
+    }
+
+    /**
+     * Берёт трату 
+     */
+    private function foo()
+    {
+
     }
 }
